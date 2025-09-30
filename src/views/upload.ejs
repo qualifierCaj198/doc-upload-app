@@ -1,0 +1,99 @@
+\
+<%- include('layout', { body: `
+<section class="card">
+  <% if (typeof error !== 'undefined' && error) { %>
+    <article class="muted" style="color:#b91c1c">Error: <%= error %></article>
+  <% } %>
+
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <div class="row">
+      <div>
+        <label>First Name
+          <input type="text" name="first_name" required />
+        </label>
+      </div>
+      <div>
+        <label>Last Name
+          <input type="text" name="last_name" required />
+        </label>
+      </div>
+      <div>
+        <label>Phone
+          <input type="tel" name="phone" placeholder="(555) 123-4567" required />
+        </label>
+      </div>
+      <div>
+        <label>Email
+          <input type="email" name="email" required />
+        </label>
+      </div>
+      <div>
+        <label>SSN (Last 4)
+          <input type="password" name="ssn_last4" pattern="\\d{4}" maxlength="4" required />
+        </label>
+      </div>
+      <div>
+        <label>Documents (PDF/JPG/PNG/DOC/DOCX)
+          <input type="file" name="documents" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple required />
+        </label>
+      </div>
+    </div>
+
+    <label style="display:flex;gap:.6rem;align-items:flex-start;margin:.75rem 0 1rem;">
+      <input type="checkbox" name="certify" required />
+      <span>
+        I hereby certify that all documents uploaded are true, accurate, and complete.
+        I understand that providing false information may result in denial of coverage or penalties.
+      </span>
+    </label>
+
+    <button type="submit">Submit Documents</button>
+  </form>
+</section>
+
+<section class="card" style="margin-top:1rem">
+  <h3>📋 REQUIRED: Annual Income Letter</h3>
+  <p>You must download, complete, and upload the Annual Income Letter of Explanation.</p>
+
+  <p>
+    <a href="/public/income-letter.pdf" download class="contrast">📥 Download Income Letter Form</a>
+  </p>
+
+  <p>Print this form, fill it out completely, and include it with your upload.</p>
+
+  <h4>📋 ACA Income Verification Guidelines</h4>
+  <p><strong>Acceptable Additional Documents:</strong></p>
+
+  <ol>
+    <li><strong>Standard Employment Documents</strong>
+      <ul>
+        <li>Most recent federal or state tax return</li>
+        <li>W-2 or 1099 forms (MISC, G, R, etc.)</li>
+        <li>Recent pay stubs showing typical earnings</li>
+      </ul>
+    </li>
+    <li><strong>Changing Income (Increase/Decrease)</strong>
+      <ul>
+        <li>Recent pay stubs reflecting new income</li>
+        <li>Letter or contract showing new wage or end date of work</li>
+      </ul>
+    </li>
+    <li><strong>Self-Employment / Unearned Income</strong>
+      <ul>
+        <li>Profit and Loss statements, Schedule C, Schedule K-1</li>
+        <li>Social Security Benefit statement</li>
+        <li>Unemployment benefit letter</li>
+        <li>Pension/annuity/royalty/interest/dividend income statements</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h4>💡 Important Tips</h4>
+  <ul>
+    <li>The Income Letter form is mandatory for all submissions</li>
+    <li>Make sure all documents clearly show your full name, income amount, and period covered</li>
+    <li>Upload documents in PDF, JPG, PNG, DOC, or DOCX format</li>
+    <li>Maximum file size: <strong>10MB</strong> per document</li>
+  </ul>
+</section>
+` }) %>

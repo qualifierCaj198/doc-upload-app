@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= typeof title !== 'undefined' ? title : 'Upload' %></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    body { max-width: 900px; margin: 0 auto; padding: 1rem; }
+    header { margin: 1rem 0 2rem; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.2rem; }
+    .muted { color: #6b7280; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+    footer { margin: 2rem 0 1rem; color: #6b7280; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Secure Document Upload</h2>
+    <p class="muted">Submit your documents safely. We’ll confirm receipt and update your file.</p>
+  </header>
+  <main><%- body %></main>
+  <footer><p>© <%= new Date().getFullYear() %> Document Upload</p></footer>
+</body>
+</html>

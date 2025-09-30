@@ -1,0 +1,24 @@
+name: Deploy to Vultr
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VULTR_SSH_KEY }}
+      - name: Rsync to server
+        run: |
+          rsync -az --delete --exclude '.git' ./ ${{ secrets.VULTR_USER }}@${{ secrets.VULTR_HOST }}:${{ secrets.APP_DIR }}/
+      - name: Install & restart on server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VULTR_USER }}@${{ secrets.VULTR_HOST }} '              cd ${{ secrets.APP_DIR }} &&               (npm ci || npm install) &&               npm run db:init &&               pm2 restart doc-upload || pm2 start server.js --name doc-upload             '

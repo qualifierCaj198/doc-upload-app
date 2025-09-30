@@ -1,0 +1,11 @@
+<%- include('layout', { body: `
+<section class="card">
+  <h3>Thanks! We received your documents.</h3>
+  <p>Lead ID: <strong>${lead_id || 'Pending'}</strong></p>
+  <ul>
+    <li>TLD status: <strong>${tld_status}</strong></li>
+    <li>Connex status: <strong>${connex_status}</strong></li>
+  </ul>
+  <a href="/">Upload more</a>
+</section>
+` }) %>

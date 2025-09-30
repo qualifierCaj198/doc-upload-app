@@ -1,0 +1,31 @@
+{
+  "name": "doc-upload-app",
+  "version": "1.1.0",
+  "description": "Document Upload App with Admin panel, TLD CRM + Connex AI integrations",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "db:init": "node scripts/db_init.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "basic-auth": "^2.0.1",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.11.5",
+    "sanitize-html": "^2.13.0",
+    "uuid": "^9.0.1",
+    "form-data": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.9.0"
+  }
+}
