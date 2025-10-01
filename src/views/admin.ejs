@@ -13,6 +13,7 @@
           <th>TLD</th>
           <th>Connex</th>
           <th>Files</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,10 @@
               ${(r.files || []).map(f => 
                 `<a href="/admin/file/${r.id}/${encodeURIComponent(f.stored_as)}" title="${f.mimetype || ''}">${f.originalname}</a>`
               ).join('<br/>')}
+            </td>
+            <td>
+              <a href="/admin/verify/${r.id}">Verify</a> |
+              <a href="/admin/debug/${r.id}">Debug</a>
             </td>
           </tr>
         `).join('')}

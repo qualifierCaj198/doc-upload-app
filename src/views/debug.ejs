@@ -1,0 +1,10 @@
+<%- include('layout', { body: `
+  <section class="card">
+    <h3>Debug: TLD Meta</h3>
+    <p class="muted">Upload ID: ${row.id}</p>
+    <pre style="white-space:pre-wrap;overflow:auto;max-height:60vh;">
+${JSON.stringify(row.tld_meta || {}, null, 2)}
+    </pre>
+    <p><a href="/admin">← Back to Admin</a></p>
+  </section>
+` }) %>

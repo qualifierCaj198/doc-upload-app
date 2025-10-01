@@ -4,10 +4,12 @@ dotenv.config();
 
 const CONNEX_URL = process.env.CONNEX_TRIGGER_URL;
 const CONNEX_AUTH = process.env.CONNEX_BASIC_AUTH;
+const TIMEOUT = parseInt(process.env.HTTP_TIMEOUT_MS || '25000', 10);
 
 export async function notifyConnex({ customer_id, fields }) {
   const payload = { customer_id, fields, flow_type: 'customer' };
   const { data } = await axios.post(CONNEX_URL, payload, {
+    timeout: TIMEOUT,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': CONNEX_AUTH

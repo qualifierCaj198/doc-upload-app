@@ -1,0 +1,44 @@
+<%- include('layout', { body: `
+  <section class="card">
+    <h3>Verify Lead for ${upload.first_name} ${upload.last_name}</h3>
+    <p class="muted">Email: ${upload.email} · Phone: ${upload.phone} · Current lead_id: <strong>${upload.lead_id || 'none'}</strong></p>
+
+    ${(Array.isArray(matches) && matches.length)
+      ? `
+        <table>
+          <thead>
+            <tr>
+              <th>Lead ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${matches.map(m => `
+              <tr>
+                <td>${m.lead_id || m.id || ''}</td>
+                <td>${(m.first_name || '') + ' ' + (m.last_name || '')}</td>
+                <td>${m.email || ''}</td>
+                <td>${m.phone || ''}</td>
+                <td>
+                  ${(m.lead_id || m.id)
+                    ? `<form method="post" action="/admin/set-lead" style="margin:0">
+                         <input type="hidden" name="upload_id" value="${upload.id}" />
+                         <input type="hidden" name="lead_id" value="${m.lead_id || m.id}" />
+                         <button type="submit">Use this Lead</button>
+                       </form>`
+                    : ''}
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `
+      : `<p>No matches found or search error. Try different info or check Debug.</p>`
+    }
+
+    <p style="margin-top:1rem"><a href="/admin">← Back to Admin</a></p>
+  </section>
+` }) %>
