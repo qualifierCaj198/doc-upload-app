@@ -1,35 +1,39 @@
 <%- include('layout', { body: `
-<section class="card">
-  <h3>Admin: Recent Uploads</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>When</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Lead ID</th>
-        <th>TLD</th>
-        <th>Connex</th>
-        <th>Files</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${rows.map(r => `
+  <section class="card">
+    <h3>Admin: Recent Uploads</h3>
+    <table>
+      <thead>
         <tr>
-          <td>${r.created_at_fmt}</td>
-          <td>${r.first_name} ${r.last_name}</td>
-          <td>${r.phone}</td>
-          <td>${r.email}</td>
-          <td>${r.lead_id || ''}</td>
-          <td title="${r.tld_error || ''}">${r.tld_status || ''}</td>
-          <td title="${r.connex_error || ''}">${r.connex_status || ''}</td>
-          <td>
-            ${(r.files || []).map(f => f.originalname).join('<br/>')}
-          </td>
+          <th>When</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>SSN Last 4</th>
+          <th>Lead ID</th>
+          <th>TLD</th>
+          <th>Connex</th>
+          <th>Files</th>
         </tr>
-      `).join('')}
-    </tbody>
-  </table>
-</section>
-` }) %>
+      </thead>
+      <tbody>
+        ${rows.map(r => `
+          <tr>
+            <td>${r.created_at_fmt}</td>
+            <td>${r.first_name} ${r.last_name}</td>
+            <td>${r.phone}</td>
+            <td>${r.email}</td>
+            <td>${r.ssn_last4 || ''}</td>
+            <td>${r.lead_id || ''}</td>
+            <td title="${r.tld_error || ''}">${r.tld_status || ''}</td>
+            <td title="${r.connex_error || ''}">${r.connex_status || ''}</td>
+            <td>
+              ${(r.files || []).map(f => 
+                `<a href="/admin/file/${r.id}/${encodeURIComponent(f.stored_as)}" title="${f.mimetype || ''}">${f.originalname}</a>`
+              ).join('<br/>')}
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  </section>
+  ` }) %>
